@@ -8,24 +8,29 @@
     4. Создать экземпляр класс CreditAccount и вызвать у него каждый из возможных методов.
 """
 
-# код писать тут
 
-
-class CreditAccount:
-    def __init__(self, owner_full_name: str, balance: float):
+class BankAccount:
+    def __init__(self, owner_full_name: str, balance: float) -> None:
         self.owner_full_name = owner_full_name
         self.balance = balance
 
-    def increase_balance(self, amount: float):
+    def increase_balance(self, amount: float) -> None:
         self.balance += amount
 
-    def decrease_balance(self, amount: float):
+    def decrease_balance(self, amount: float) -> None:
         self.balance -= amount
 
-    def is_eligible_for_credit(self):
+
+class CreditAccount(BankAccount):
+    def is_eligible_for_credit(self) -> bool:
         return self.balance > 1000
 
 
 if __name__ == '__main__':
-    pass  # код писать тут
-
+    bank_account = BankAccount(owner_full_name='Иван Иванов', balance=100.5)
+    bank_account.increase_balance(1000.)
+    bank_account.decrease_balance(50.5)
+    credit_account = CreditAccount(owner_full_name='Пётр Петров', balance=111.2)
+    credit_account.increase_balance(100.)
+    credit_account.decrease_balance(5.)
+    credit_account.is_eligible_for_credit()
