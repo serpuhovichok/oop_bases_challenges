@@ -28,7 +28,7 @@ class Product:
 class AlcoholProduct(Product):
     def is_available(self) -> bool:
         if 5 < datetime.now().hour < 23:
-            return self.stock_quantity > 0
+            return super().is_available()
 
         return False
 

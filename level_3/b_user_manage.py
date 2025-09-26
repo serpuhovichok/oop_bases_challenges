@@ -26,13 +26,14 @@ class AdminManager(UserManager):
     def ban_username(self, username: str) -> None:
         if username not in self.usernames:
             print("Такого пользователя не существует.")
-        else:
-            self.usernames.remove(username)
+            return
+
+        self.usernames.remove(username)
 
 
 class SuperAdminManager(AdminManager):
     def ban_all_users(self) -> None:
-        self.usernames = []
+        self.usernames.clear()
 
 
 if __name__ == '__main__':

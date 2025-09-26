@@ -22,10 +22,9 @@ class TextProcessor:
 
 class AdvancedTextProcessor(TextProcessor):
     def summarize(self) -> str:
-        return (
-                    f'Total text length: {len(self.text)}, '
-                    f'total number of words in the text: {len(self.text.split())}'
-                )
+        summarized_text = super().summarize()
+        words_count = len(self.text.split())
+        return f'{summarized_text}, total number of words in the text: {words_count}'
 
 
 if __name__ == '__main__':
