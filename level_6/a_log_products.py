@@ -10,6 +10,11 @@
 """
 
 
+class PrintLoggerMixin:
+    def log(self, message: str) -> None:
+        print(message)
+
+
 class Product:
     def __init__(self, title: str, price: float):
         self.title = title
@@ -19,24 +24,33 @@ class Product:
         return f'Product {self.title} with price {self.price}'
 
 
-class PremiumProduct(Product):
+class PremiumProduct(Product, PrintLoggerMixin):
     def increase_price(self):
         self.price *= 1.2
+        self.log(f"Price increased. New price {self.price}")
 
     def get_info(self):
         base_info = super().get_info()
-        return f'{base_info} (Premium)'
+        result = f'{base_info} (Premium)'
+        self.log(f"Info received: {result}")
+        return result
 
 
-class DiscountedProduct(Product):
+class DiscountedProduct(Product, PrintLoggerMixin):
     def decrease_price(self):
         self.price /= 1.2
+        self.log(f"Price decreased. New price {self.price}")
 
     def get_info(self):
         base_info = super().get_info()
-        return f'{base_info} (Discounted)'
-
+        result = f'{base_info} (Discounted)'
+        self.log(f"Info received: {result}")
+        return result
 
 if __name__ == '__main__':
-    pass
-
+    product_1 = PremiumProduct(title="Premium product", price=100.)
+    product_1.increase_price()
+    product_1.get_info()
+    product_2 = DiscountedProduct(title="Discounted product", price=10.)
+    product_2.decrease_price()
+    product_2.get_info()
