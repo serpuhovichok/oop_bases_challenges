@@ -10,18 +10,28 @@
 
 
 class TextProcessor:
-    def __init__(self, text):
+    def __init__(self, text) -> None:
         self.text = text
 
-    def to_upper(self):
+    def to_upper(self) -> str:
         return self.text.upper()
 
-    def summarize(self):
+    def summarize(self) -> str:
         return f'Total text length: {len(self.text)}'
 
 
-# код писать тут
+class AdvancedTextProcessor(TextProcessor):
+    def summarize(self) -> str:
+        summarized_text = super().summarize()
+        words_count = len(self.text.split())
+        return f'{summarized_text}, total number of words in the text: {words_count}'
 
 
 if __name__ == '__main__':
-    pass  # код писать тут
+    processor = TextProcessor("Какой-то текст")
+    print(processor.to_upper())
+    print(processor.summarize())
+
+    advanced_processor = AdvancedTextProcessor("Какой-то другой текст")
+    print(advanced_processor.to_upper())
+    print(advanced_processor.summarize())
